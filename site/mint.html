@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mint — OSSYREL · The Hash Ledger</title>
+<meta name="description" content="Mint an OSSYREL Node NFT. Five classes, one supply of 5,000, on BNB Chain.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="demo-strip">DEMO SITE — Minting is not live. No contract is deployed. No transaction will be sent.</div>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <rect x="2" y="2" width="36" height="36" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+        <circle cx="20" cy="20" r="10" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+        <circle cx="20" cy="20" r="4" fill="#d4af37"/>
+      </svg>
+      <span class="brand-name">OSS<span>YREL</span></span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a class="active" href="mint.html">Mint</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="rewards.html">Rewards</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="admin.html">Admin</a></li>
+        <li><a href="agent/index.html">Agent</a></li>
+      </ul>
+    </nav>
+    <button class="wallet-pill" data-wallet-btn type="button"><span class="dot"></span><span data-wallet-status>Connect Wallet · DEMO</span></button>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Mint · BNB Chain (56) · ERC-721</p>
+        <h2>Mint a Node <span class="badge badge-demo">Demo</span> <span class="badge badge-pending">Contract pending</span></h2>
+        <p class="lead">Five classes, one global supply of 5,000. Prices below are the published OSSYREL mint spec — shown here by design for this project.</p>
+      </div>
+
+      <div class="demo-note"><strong>DEMO mint:</strong> nothing here connects a wallet or sends a transaction. The contract is not deployed. The "Mint" button below only simulates the flow so the interface can be reviewed. It will never ask for a seed phrase or private key.</div>
+
+      <!-- Supply progress -->
+      <div class="card" style="margin-bottom: 22px;">
+        <div class="kv"><span>Minted (Demo)</span><b><span data-stat="minted">0</span> / <span data-stat="max-supply">5,000</span></b></div>
+        <div class="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="5000" aria-label="Mint progress (demo)">
+          <i class="minted-bar" style="width: 0%;"></i>
+        </div>
+        <p class="small" style="margin-top: 10px;">Mint progress: <span data-stat="minted-pct">0.0%</span> · Current Era: <span data-stat="current-era">Era 1</span> · Rate: <span data-stat="era-rate">10 OSR / share / day</span></p>
+      </div>
+
+      <!-- Tier cards -->
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));" id="tier-cards"></div>
+
+      <!-- Mint form -->
+      <div class="grid grid-2" style="margin-top: 22px;">
+        <div class="card">
+          <h3>Your Mint</h3>
+          <label for="tier-select">Class</label>
+          <select id="tier-select"></select>
+          <div style="height: 14px;"></div>
+          <label>Quantity</label>
+          <div class="qty-row">
+            <button class="qty-btn" id="qty-minus" type="button" aria-label="Decrease quantity">−</button>
+            <div class="qty-val" id="qty-val">1</div>
+            <button class="qty-btn" id="qty-plus" type="button" aria-label="Increase quantity">+</button>
+          </div>
+          <p class="small" id="qty-hint" style="margin-top: 8px;"></p>
+          <div class="kv" style="margin-top: 12px;"><span>Price each</span><b id="price-each">—</b></div>
+          <div class="kv"><span>Hash rate each</span><b id="hash-each">—</b></div>
+          <div class="kv"><span>Shares each</span><b id="shares-each">—</b></div>
+          <div class="kv"><span>Total cost</span><b id="price-total">—</b></div>
+          <div class="kv"><span>Total hash rate</span><b id="hash-total">—</b></div>
+          <div class="kv"><span>Total shares</span><b id="shares-total">—</b></div>
+          <div style="height: 16px;"></div>
+          <button class="btn btn-gold" id="mint-btn" type="button" style="width: 100%;">Simulate Mint (DEMO)</button>
+          <p class="small" style="margin-top: 10px;">Button label: <strong>PENDING contract integration</strong> — a real mint button will appear only after the contract is deployed and verified.</p>
+        </div>
+
+        <div class="card">
+          <h3>Transaction Status <span class="badge badge-demo">Demo</span></h3>
+          <div class="log" data-log="mint" style="min-height: 220px;">[ready] Mint simulator loaded. No wallet connected. No contract deployed.
+Select a class and quantity, then press "Simulate Mint (DEMO)".</div>
+          <div id="mint-confirm" style="margin-top: 16px;"></div>
+        </div>
+      </div>
+
+      <div class="disclaimer"><strong>Simulation, not a promise:</strong> Era rates (Era 1: 10 OSR per share per day, halving each Era) and the 30-day / 150,000-share Era transition are design parameters of the OSSYREL simulation. They are not a guarantee of profit or return, and OSR has no guaranteed market value.</div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap foot-grid">
+    <div><strong style="color: var(--text); letter-spacing: .2em;">OSSYREL</strong> — The Hash Ledger<br><span>BNB Chain (56) · ERC-721 · OSR (BEP-20)</span></div>
+    <div><a href="index.html">Home</a> · <a href="dashboard.html">Dashboard</a> · <a href="rewards.html">Rewards</a> · <a href="gallery.html">Gallery</a> · <a href="admin.html">Admin</a> · <a href="agent/index.html">Agent</a></div>
+    <div>DEMO static site — no contract deployed, no live data, no wallet connection.</div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const select = document.getElementById("tier-select");
+    const cardsHost = document.getElementById("tier-cards");
+    let qty = 1;
+
+    OSSYREL.tiers.forEach(t => {
+      const opt = document.createElement("option");
+      opt.value = t.id;
+      opt.textContent = `${t.name} — ${t.priceBnb === 0 ? "FREE" : t.priceBnb + " BNB"} · ${t.hashRateMh} MH/s · ${t.shares} shares`;
+      select.appendChild(opt);
+
+      const card = document.createElement("div");
+      card.className = "card tier-card tier-" + t.id;
+      card.innerHTML = `
+        <div class="tier-name">${t.name}</div>
+        <div class="price">${t.priceBnb === 0 ? "FREE" : t.priceBnb + " <small>BNB</small>"}</div>
+        <div class="kv"><span>Hash rate</span><b>${t.hashRateMh.toLocaleString()} MH/s</b></div>
+        <div class="kv"><span>Shares</span><b>${t.shares}</b></div>
+        <div class="kv"><span>Max / wallet</span><b>${t.maxPerWallet ? t.maxPerWallet : "No limit"}</b></div>
+        <p class="small" style="margin-top:10px;">${t.blurb}</p>
+        <button class="btn btn-ghost btn-sm pick-tier" data-tier="${t.id}" type="button">Select ${t.name}</button>`;
+      cardsHost.appendChild(card);
+    });
+
+    function currentTier() {
+      return OSSYREL.tiers.find(t => t.id === select.value);
+    }
+
+    function refresh() {
+      const t = currentTier();
+      if (t.maxPerWallet && qty > t.maxPerWallet) qty = t.maxPerWallet;
+      if (qty < 1) qty = 1;
+      document.getElementById("qty-val").textContent = qty;
+      document.getElementById("qty-hint").textContent =
+        t.maxPerWallet ? `${t.name} is limited to ${t.maxPerWallet} per wallet.` : "No per-wallet limit for this class.";
+      document.getElementById("price-each").textContent = t.priceBnb === 0 ? "FREE" : t.priceBnb + " BNB";
+      document.getElementById("hash-each").textContent = t.hashRateMh.toLocaleString() + " MH/s";
+      document.getElementById("shares-each").textContent = t.shares;
+      document.getElementById("price-total").textContent = t.priceBnb === 0 ? "FREE" : (t.priceBnb * qty).toFixed(4) + " BNB";
+      document.getElementById("hash-total").textContent = (t.hashRateMh * qty).toLocaleString() + " MH/s";
+      document.getElementById("shares-total").textContent = (t.shares * qty).toLocaleString();
+    }
+
+    select.addEventListener("change", refresh);
+    document.getElementById("qty-minus").addEventListener("click", () => { qty--; refresh(); });
+    document.getElementById("qty-plus").addEventListener("click", () => { qty++; refresh(); });
+    document.querySelectorAll(".pick-tier").forEach(b => {
+      b.addEventListener("click", () => { select.value = b.getAttribute("data-tier"); qty = 1; refresh(); select.scrollIntoView({ behavior: "smooth", block: "center" }); });
+    });
+
+    document.getElementById("mint-btn").addEventListener("click", () => {
+      const t = currentTier();
+      const total = (t.priceBnb * qty).toFixed(4);
+      logLine("mint", `DEMO mint request: ${qty} × ${t.name} = ${t.priceBnb === 0 ? "FREE" : total + " BNB"} · ${(t.hashRateMh * qty).toLocaleString()} MH/s · ${t.shares * qty} shares.`, "info");
+      logLine("mint", "No wallet connected — simulation only. A real mint requires a deployed contract and an explicit wallet signature.", "warn");
+      logLine("mint", "DEMO mint confirmed (simulated). No token was minted on-chain.", "ok");
+      document.getElementById("mint-confirm").innerHTML = `
+        <div class="demo-note" style="margin:0;">
+          <strong>DEMO mint confirmation (simulated — not on-chain):</strong><br>
+          ${qty} × ${t.name} Node · ${t.priceBnb === 0 ? "FREE" : total + " BNB"} · ${(t.hashRateMh * qty).toLocaleString()} MH/s · ${t.shares * qty} shares<br>
+          Status: <strong>SIMULATED</strong> — no contract, no transaction hash, no token ID.<br>
+          Real mint: <strong>PENDING</strong> contract deployment + wallet integration.
+        </div>`;
+    });
+
+    refresh();
+  });
+</script>
+</body>
+</html>

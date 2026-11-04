@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Documentation — OSSYREL · The Hash Ledger</title>
+<meta name="description" content="Documentation for AI agents using the OSSYREL interface: endpoints, data model, and rules.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="demo-strip">AGENT DOCUMENTATION — DEMO data only. No contract deployed. Agents read data and prepare requests; nothing executes without explicit wallet authorization.</div>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="../index.html">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <rect x="2" y="2" width="36" height="36" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+        <circle cx="20" cy="20" r="10" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+        <circle cx="20" cy="20" r="4" fill="#d4af37"/>
+      </svg>
+      <span class="brand-name">OSS<span>YREL</span></span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../mint.html">Mint</a></li>
+        <li><a href="../dashboard.html">Dashboard</a></li>
+        <li><a href="../rewards.html">Rewards</a></li>
+        <li><a href="../gallery.html">Gallery</a></li>
+        <li><a href="../admin.html">Admin</a></li>
+        <li><a class="active" href="../agent/index.html">Agent</a></li>
+      </ul>
+    </nav>
+    <button class="wallet-pill" data-wallet-btn type="button"><span class="dot"></span><span data-wallet-status>Connect Wallet · DEMO</span></button>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Documentation · For Agents &amp; Developers</p>
+        <h2>Agent Documentation <span class="badge badge-demo">Demo</span></h2>
+        <p class="lead">How an AI agent reads OSSYREL data, what each file means, and the rules that govern agent actions. Also see <a href="../agent/skill.md">skill.md</a> (plain-text version) and <a href="../agent/index.html">agent/index.html</a>.</p>
+      </div>
+
+      <h2>1 · Overview</h2>
+      <p>OSSYREL — The Hash Ledger — is a collection of 5,000 ERC-721 Node NFTs on BNB Chain (Chain ID 56). Five classes share one global supply. Each node carries hash rate and shares; shares accrue OSR (BEP-20) daily at the current Era rate. The contract is <strong>PENDING — not deployed</strong>, so every number on this site is DEMO simulation data.</p>
+
+      <h2>2 · Endpoints</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>File</th><th>Purpose</th><th>Format</th></tr></thead>
+          <tbody>
+            <tr><td><a href="../collection.json">collection.json</a></td><td>Full collection spec: tiers, prices, hash rate, shares, eras, OSR tokenomics</td><td>JSON</td></tr>
+            <tr><td><a href="../api/stats.json">api/stats.json</a></td><td>Current state (DEMO): minted, hash rate, shares, Era, contract status</td><td>JSON</td></tr>
+            <tr><td><a href="../api/eras.json">api/eras.json</a></td><td>Era schedule, per-Era rates, transition rules, era history</td><td>JSON</td></tr>
+            <tr><td><a href="../api/nodes.json">api/nodes.json</a></td><td>Node registry — DEMO example nodes with attributes and ownership</td><td>JSON</td></tr>
+            <tr><td><a href="../agent/skill.md">agent/skill.md</a></td><td>Agent skill: rules and spec in plain text</td><td>Markdown</td></tr>
+            <tr><td><a href="../agent/index.html">agent/index.html</a></td><td>Agent landing page (HTML summary of the same data)</td><td>HTML</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>3 · Data model</h2>
+      <div class="card">
+        <h3>collection.json</h3>
+        <p><code>name</code>, <code>collection</code>, <code>tagline</code>, <code>chain</code> (name + chainId 56), <code>standard</code> ("ERC-721"), <code>maxSupply</code> (5000), <code>tiers[]</code> (id, name, priceBnb, hashRateMh, shares, maxPerWallet), <code>osr</code> (symbol, standard "BEP-20", maxSupply 1,000,000,000, miningAllocation 700,000,000, reserveAllocation 300,000,000, era1PerSharePerDay 10, eraDays 30, eraNewSharesTrigger 150000), <code>contract</code> (status "PENDING", address null), <code>status</code> ("DEMO").</p>
+        <h3>api/stats.json</h3>
+        <p><code>status</code> ("DEMO"), <code>minted</code>, <code>maxSupply</code>, <code>totalHashRateMh</code>, <code>totalShares</code>, <code>currentEra</code>, <code>eraRateOsrPerSharePerDay</code>, <code>osrDistributed</code>, <code>contract</code> (status "PENDING", address null).</p>
+        <h3>api/eras.json</h3>
+        <p><code>currentEra</code>, <code>transition</code> (days 30, newShares 150000, rule "whichever first"), <code>eras[]</code> (era number, rate, status), <code>note</code> (simulation disclaimer).</p>
+        <h3>api/nodes.json</h3>
+        <p><code>status</code> ("DEMO"), <code>nodes[]</code> (tokenId, tier, priceBnb, hashRateMh, shares, status, owner "DEMO"). No real tokens exist yet.</p>
+      </div>
+
+      <h2>4 · The mint flow (when live)</h2>
+      <div class="grid grid-3">
+        <div class="card"><h3>1 · Read</h3><p>Fetch <code>collection.json</code> and <code>api/stats.json</code>. Confirm a contract address is present and verified. Today it is not — status is PENDING.</p></div>
+        <div class="card"><h3>2 · Prepare</h3><p>Build the mint request from the tier table: class, quantity, exact BNB price. Show the user the exact amount before anything is signed.</p></div>
+        <div class="card"><h3>3 · Authorize</h3><p>The user signs in their own wallet. The agent never signs, never holds keys, and never proceeds without explicit authorization.</p></div>
+      </div>
+
+      <h2>5 · Rules for agents</h2>
+      <ul style="margin-left: 20px; color: var(--muted);">
+        <li>Read-only by default. Prepare requests; never execute without explicit wallet authorization.</li>
+        <li>Never ask for a seed phrase, private key, or recovery phrase.</li>
+        <li>Label DEMO data as DEMO. Never present demo figures as live earnings.</li>
+        <li>Do not invent a contract address, transaction hash, or live statistic. If it is missing, say so.</li>
+        <li>Era rates are simulation parameters, not a promise of profit or return.</li>
+      </ul>
+
+      <h2>6 · Site map</h2>
+      <p><a href="../index.html">Home</a> · <a href="../mint.html">Mint</a> · <a href="../dashboard.html">Dashboard</a> · <a href="../rewards.html">Rewards</a> · <a href="../gallery.html">Gallery</a> · <a href="../admin.html">Admin</a> · <a href="../agent/index.html">Agent interface</a></p>
+      <div class="disclaimer"><strong>Simulation, not a promise:</strong> Era rates, halving, and the 30-day / 150,000-share transition are design parameters of the OSSYREL simulation. They are not a guarantee of profit or return, and OSR has no guaranteed market value.</div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap foot-grid">
+    <div><strong style="color: var(--text); letter-spacing: .2em;">OSSYREL</strong> — The Hash Ledger<br><span>BNB Chain (56) · ERC-721 · OSR (BEP-20)</span></div>
+    <div><a href="../index.html">Home</a> · <a href="../mint.html">Mint</a> · <a href="../dashboard.html">Dashboard</a> · <a href="../rewards.html">Rewards</a> · <a href="../gallery.html">Gallery</a> · <a href="../admin.html">Admin</a></div>
+    <div>DEMO static site — no contract deployed, no live data, no wallet connection.</div>
+  </div>
+</footer>
+
+<script src="../assets/app.js"></script>
+</body>
+</html>

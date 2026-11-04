@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Interface — OSSYREL · The Hash Ledger</title>
+<meta name="description" content="Machine-readable OSSYREL interface for AI agents: stats, eras, nodes, and the agent skill.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="demo-strip">AGENT INTERFACE — DEMO data only. No contract deployed. Agents read data and prepare requests; nothing executes without explicit wallet authorization.</div>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="../index.html">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <rect x="2" y="2" width="36" height="36" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+        <circle cx="20" cy="20" r="10" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+        <circle cx="20" cy="20" r="4" fill="#d4af37"/>
+      </svg>
+      <span class="brand-name">OSS<span>YREL</span></span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../mint.html">Mint</a></li>
+        <li><a href="../dashboard.html">Dashboard</a></li>
+        <li><a href="../rewards.html">Rewards</a></li>
+        <li><a href="../gallery.html">Gallery</a></li>
+        <li><a href="../admin.html">Admin</a></li>
+        <li><a class="active" href="index.html">Agent</a></li>
+      </ul>
+    </nav>
+    <button class="wallet-pill" data-wallet-btn type="button"><span class="dot"></span><span data-wallet-status>Connect Wallet · DEMO</span></button>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Agent Interface · Machine-Readable</p>
+        <h2>Agent Interface <span class="badge badge-demo">Demo</span> <span class="badge badge-pending">Contract pending</span></h2>
+        <p class="lead">This page is for AI agents acting on behalf of a user. It exposes OSSYREL's spec and DEMO state as plain files an agent can fetch and read — no authentication, no execution.</p>
+      </div>
+
+      <div class="demo-note"><strong>Agent rule:</strong> an agent may only <em>read</em> data from this interface and <em>prepare</em> a transaction request for the user. No transaction executes without the user's explicit wallet authorization. The agent must never ask for a seed phrase or private key. There is no contract to call yet — every endpoint below is DEMO data.</div>
+
+      <h2>Endpoints</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Resource</th><th>Path</th><th>Contents</th></tr></thead>
+          <tbody>
+            <tr><td>Collection spec</td><td><a href="../collection.json">../collection.json</a></td><td>Full spec: tiers, prices, hash rate, shares, eras, OSR tokenomics</td></tr>
+            <tr><td>Live stats (Demo)</td><td><a href="../api/stats.json">../api/stats.json</a></td><td>Minted, hash rate, shares, current Era, contract status</td></tr>
+            <tr><td>Era schedule</td><td><a href="../api/eras.json">../api/eras.json</a></td><td>Era rates, halving, transition rules, era history</td></tr>
+            <tr><td>Node registry (Demo)</td><td><a href="../api/nodes.json">../api/nodes.json</a></td><td>Example nodes, attributes, ownership (DEMO)</td></tr>
+            <tr><td>Agent skill</td><td><a href="skill.md">skill.md</a></td><td>How an agent should use this interface</td></tr>
+            <tr><td>Agent docs</td><td><a href="../docs/index.html">../docs/index.html</a></td><td>Human-readable agent documentation</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 style="margin-top: 40px;">Current State (Demo)</h2>
+      <div class="grid grid-4">
+        <div class="card"><div class="stat-num" data-stat="minted">0</div><div class="stat-label">Minted (Demo)</div></div>
+        <div class="card"><div class="stat-num" data-stat="total-hash">0 MH/s</div><div class="stat-label">Total Hash Rate (Demo)</div></div>
+        <div class="card"><div class="stat-num" data-stat="current-era">Era 1</div><div class="stat-label">Current Era (Demo)</div></div>
+        <div class="card"><div class="stat-num" data-stat="contract-status">PENDING</div><div class="stat-label">Contract Status</div></div>
+      </div>
+
+      <h2 style="margin-top: 40px;">Mint Spec (for agents)</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Class</th><th class="num">Price (BNB)</th><th class="num">Hash Rate</th><th class="num">Shares</th><th class="num">Max / Wallet</th></tr></thead>
+          <tbody id="agent-tier-table"></tbody>
+        </table>
+      </div>
+      <p class="small" style="margin-top: 10px;">Chain: BNB Chain, Chain ID 56 · Standard: ERC-721 · Max supply: 5,000 (shared across all classes) · Reward token: OSR (BEP-20), max 1,000,000,000, mining 700,000,000, reserve 300,000,000 · Era 1: 10 OSR / share / day, halving each Era · Era transition: 30 days or 150,000 new shares, whichever comes first.</p>
+
+      <h2 style="margin-top: 40px;">How an Agent Mints (when live)</h2>
+      <div class="grid grid-3">
+        <div class="card"><h3>1 · Read</h3><p>Fetch <code>api/stats.json</code> and <code>collection.json</code>. Confirm the contract address is present and verified — today it is not (PENDING).</p></div>
+        <div class="card"><h3>2 · Prepare</h3><p>Build the mint request from the spec: class, quantity, exact price from the tier table. Show the user the exact amount before anything is signed.</p></div>
+        <div class="card"><h3>3 · Authorize</h3><p>The user signs in their own wallet. The agent never signs, never holds keys, and never proceeds without that explicit authorization.</p></div>
+      </div>
+      <div class="disclaimer"><strong>Simulation, not a promise:</strong> Era rates and the halving schedule are design parameters of the OSSYREL simulation, not a guarantee of profit or return. An agent must not present demo figures as live earnings.</div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap foot-grid">
+    <div><strong style="color: var(--text); letter-spacing: .2em;">OSSYREL</strong> — The Hash Ledger<br><span>BNB Chain (56) · ERC-721 · OSR (BEP-20)</span></div>
+    <div><a href="../index.html">Home</a> · <a href="../mint.html">Mint</a> · <a href="../dashboard.html">Dashboard</a> · <a href="../rewards.html">Rewards</a> · <a href="../gallery.html">Gallery</a> · <a href="../admin.html">Admin</a></div>
+    <div>DEMO static site — no contract deployed, no live data, no wallet connection.</div>
+  </div>
+</footer>
+
+<script src="../assets/app.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const tbody = document.getElementById("agent-tier-table");
+    OSSYREL.tiers.forEach(t => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td><strong style="color:${t.color};">${t.name}</strong></td>
+        <td class="num">${t.priceBnb}</td>
+        <td class="num">${t.hashRateMh} MH/s</td>
+        <td class="num">${t.shares}</td>
+        <td class="num">${t.maxPerWallet ? t.maxPerWallet : "unlimited"}</td>`;
+      tbody.appendChild(tr);
+    });
+  });
+</script>
+</body>
+</html>

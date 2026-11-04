@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — OSSYREL · The Hash Ledger</title>
+<meta name="description" content="Browse OSSYREL Node NFTs by class — generative SVG artwork, token IDs and node attributes.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="demo-strip">DEMO SITE — Gallery artwork is generative SVG. No tokens are minted; ownership shown is DEMO.</div>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <rect x="2" y="2" width="36" height="36" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+        <circle cx="20" cy="20" r="10" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+        <circle cx="20" cy="20" r="4" fill="#d4af37"/>
+      </svg>
+      <span class="brand-name">OSS<span>YREL</span></span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="mint.html">Mint</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="rewards.html">Rewards</a></li>
+        <li><a class="active" href="gallery.html">Gallery</a></li>
+        <li><a href="admin.html">Admin</a></li>
+        <li><a href="agent/index.html">Agent</a></li>
+      </ul>
+    </nav>
+    <button class="wallet-pill" data-wallet-btn type="button"><span class="dot"></span><span data-wallet-status>Connect Wallet · DEMO</span></button>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Node Gallery · Generative SVG Artwork</p>
+        <h2>Gallery <span class="badge badge-demo">Demo</span> <span class="badge badge-pending">Contract pending</span></h2>
+        <p class="lead">Every node is a generative geometric artwork, drawn in SVG from its class and token ID. Browse all five classes below. No tokens exist yet — every entry is a DEMO preview, and the contract is PENDING deployment.</p>
+      </div>
+
+      <div class="chip-row" id="filter-row">
+        <button class="chip active" data-filter="all" type="button">All Classes</button>
+        <button class="chip" data-filter="starter" type="button">Starter</button>
+        <button class="chip" data-filter="bronze" type="button">Bronze</button>
+        <button class="chip" data-filter="silver" type="button">Silver</button>
+        <button class="chip" data-filter="gold" type="button">Gold</button>
+        <button class="chip" data-filter="diamond" type="button">Diamond</button>
+      </div>
+
+      <div class="grid grid-3" id="gallery-grid"></div>
+
+      <p class="small" style="margin-top: 22px;">Showing <span id="gallery-count">0</span> DEMO preview nodes. Real minted nodes will appear here after the contract is deployed. Ownership labels are DEMO placeholders, not on-chain owners.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap foot-grid">
+    <div><strong style="color: var(--text); letter-spacing: .2em;">OSSYREL</strong> — The Hash Ledger<br><span>BNB Chain (56) · ERC-721 · OSR (BEP-20)</span></div>
+    <div><a href="index.html">Home</a> · <a href="mint.html">Mint</a> · <a href="dashboard.html">Dashboard</a> · <a href="rewards.html">Rewards</a> · <a href="admin.html">Admin</a> · <a href="agent/index.html">Agent</a></div>
+    <div>DEMO static site — no contract deployed, no live data, no wallet connection.</div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // DEMO preview nodes: 3 token IDs per class, consistent with the spec.
+    const previews = [];
+    const tokenIds = { starter: [1, 2, 3], bronze: [101, 128, 150], silver: [42, 77, 90], gold: [7, 55, 63], diamond: [5000, 4999, 4998] };
+    OSSYREL.tiers.forEach(t => {
+      tokenIds[t.id].forEach(id => previews.push({ tier: t, tokenId: id }));
+    });
+
+    const grid = document.getElementById("gallery-grid");
+    const countEl = document.getElementById("gallery-count");
+
+    function render(filter) {
+      grid.innerHTML = "";
+      const shown = previews.filter(p => filter === "all" || p.tier.id === filter);
+      shown.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "card tier-card tier-" + p.tier.id;
+        card.innerHTML = `
+          <div class="node-art" data-node-art data-tier="${p.tier.id}" data-token="${p.tokenId}"></div>
+          <h3 style="margin-top: 14px;">Node #${p.tokenId} — ${p.tier.name}</h3>
+          <div class="kv"><span>Price</span><b>${p.tier.priceBnb === 0 ? "FREE" : p.tier.priceBnb + " BNB"}</b></div>
+          <div class="kv"><span>Hash rate</span><b>${p.tier.hashRateMh.toLocaleString()} MH/s</b></div>
+          <div class="kv"><span>Shares</span><b>${p.tier.shares}</b></div>
+          <div class="kv"><span>Max / wallet</span><b>${p.tier.maxPerWallet ? p.tier.maxPerWallet : "No limit"}</b></div>
+          <div class="kv"><span>Era rate</span><b>10 OSR / share / day</b></div>
+          <div class="kv"><span>Owner</span><b>Unminted (Demo)</b></div>`;
+        grid.appendChild(card);
+      });
+      grid.querySelectorAll("[data-node-art]").forEach(el => {
+        renderNodeArt(el, el.getAttribute("data-tier"), parseInt(el.getAttribute("data-token"), 10));
+      });
+      countEl.textContent = shown.length;
+    }
+
+    document.querySelectorAll("#filter-row .chip").forEach(chip => {
+      chip.addEventListener("click", () => {
+        document.querySelectorAll("#filter-row .chip").forEach(c => c.classList.remove("active"));
+        chip.classList.add("active");
+        render(chip.getAttribute("data-filter"));
+      });
+    });
+
+    render("all");
+  });
+</script>
+</body>
+</html>

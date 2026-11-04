@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rewards — OSSYREL · The Hash Ledger</title>
+<meta name="description" content="OSR rewards: era schedule, accrual, claimable balance and pool.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="demo-strip">DEMO SITE — All reward figures are simulation values. Claiming is PENDING until the contract is deployed and verified.</div>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <rect x="2" y="2" width="36" height="36" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+        <circle cx="20" cy="20" r="10" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+        <circle cx="20" cy="20" r="4" fill="#d4af37"/>
+      </svg>
+      <span class="brand-name">OSS<span>YREL</span></span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="mint.html">Mint</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a class="active" href="rewards.html">Rewards</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="admin.html">Admin</a></li>
+        <li><a href="agent/index.html">Agent</a></li>
+      </ul>
+    </nav>
+    <button class="wallet-pill" data-wallet-btn type="button"><span class="dot"></span><span data-wallet-status>Connect Wallet · DEMO</span></button>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">OSR Rewards · BEP-20</p>
+        <h2>Rewards <span class="badge badge-demo">Demo</span> <span class="badge badge-pending">Claim pending</span></h2>
+        <p class="lead">OSR is the reward token of The Hash Ledger. Shares accrue OSR daily at the current Era rate. The figures below are DEMO simulation values.</p>
+      </div>
+
+      <!-- Token info -->
+      <div class="grid grid-4">
+        <div class="card"><div class="stat-num">OSR</div><div class="stat-label">Token · BEP-20</div></div>
+        <div class="card"><div class="stat-num" data-stat="osr-max">1,000,000,000 OSR</div><div class="stat-label">Max Supply</div></div>
+        <div class="card"><div class="stat-num" data-stat="osr-mining">700,000,000 OSR</div><div class="stat-label">Mining Allocation (70%)</div></div>
+        <div class="card"><div class="stat-num" data-stat="osr-reserve">300,000,000 OSR</div><div class="stat-label">Reserve (30%)</div></div>
+      </div>
+
+      <div class="grid grid-2" style="margin-top: 18px;">
+        <div class="card">
+          <h3>My Rewards <span class="badge badge-demo">Demo</span></h3>
+          <div class="kv"><span>Accrued (Demo)</span><b>850 OSR</b></div>
+          <div class="kv"><span>Claimable (Demo)</span><b data-stat="osr-claimable">0 OSR</b></div>
+          <div class="kv"><span>Claimed (Demo)</span><b>0 OSR</b></div>
+          <div class="kv"><span>Daily accrual at current rate (Demo)</span><b>850 OSR / day</b></div>
+          <p class="small">Based on 85 demo shares at Era 1 rate of 10 OSR per share per day.</p>
+        </div>
+
+        <div class="card">
+          <h3>Claim OSR <span class="badge badge-pending">Pending</span></h3>
+          <p>Claiming is <strong>not available yet</strong>. The OSR claim function lives in the reward contract, which has not been deployed or verified.</p>
+          <p class="small">When live, claiming will require an explicit wallet signature — one claim per request, no automatic withdrawals, no seed phrase, ever.</p>
+          <button class="btn btn-dim" type="button" disabled aria-disabled="true" title="Claim is disabled — contract not deployed">Claim OSR — Disabled (PENDING)</button>
+          <p class="small" style="margin-top: 10px;">Status: <strong>PENDING</strong> — claim interface unlocks only after the contract is deployed and verified on BscScan.</p>
+        </div>
+      </div>
+
+      <div class="pending-note"><strong>PENDING — claim interface:</strong> the button above is intentionally disabled. There is no claimable OSR on-chain because no contract exists yet. Any OSR balance shown on this page is a DEMO simulation value.</div>
+
+      <!-- Era history -->
+      <h2 style="margin-top: 40px;">Era Schedule &amp; History <span class="badge badge-demo">Demo</span></h2>
+      <p class="lead">Era 1 pays 10 OSR per share per day. Each Era halves the rate. An Era ends after 30 days or 150,000 new shares — whichever comes first.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Era</th><th class="num">OSR / share / day</th><th>Transition trigger</th><th>Status</th></tr></thead>
+          <tbody id="era-table"></tbody>
+        </table>
+      </div>
+
+      <!-- Pool -->
+      <h2 style="margin-top: 40px;">Reward Pool <span class="badge badge-demo">Demo</span></h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="stat-num" data-stat="osr-mining">700,000,000 OSR</div><div class="stat-label">Mining Pool Total</div></div>
+        <div class="card"><div class="stat-num" data-stat="osr-distributed">0 OSR</div><div class="stat-label">Distributed (Demo)</div></div>
+        <div class="card"><div class="stat-num">700,000,000 OSR</div><div class="stat-label">Remaining in Pool (Demo)</div></div>
+      </div>
+
+      <!-- Reward history -->
+      <h2 style="margin-top: 40px;">Reward History <span class="badge badge-demo">Demo</span></h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Date (Demo)</th><th>Source</th><th>Era</th><th class="num">OSR</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Day 1, Era 1</td><td>Node #7 — GOLD · 50 shares</td><td>1</td><td class="num">500</td><td>Accrued (Demo)</td></tr>
+            <tr><td>Day 1, Era 1</td><td>Node #42 — SILVER · 25 shares</td><td>1</td><td class="num">250</td><td>Accrued (Demo)</td></tr>
+            <tr><td>Day 1, Era 1</td><td>Node #128 — BRONZE · 10 shares</td><td>1</td><td class="num">100</td><td>Accrued (Demo)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="disclaimer"><strong>Simulation, not a promise:</strong> Era rates, halving, the 30-day / 150,000-share transition, and the OSR pool figures are parameters of the OSSYREL design simulation. They are not a guarantee of profit or return. OSR has no guaranteed market value, and no OSR has been minted or distributed.</div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap foot-grid">
+    <div><strong style="color: var(--text); letter-spacing: .2em;">OSSYREL</strong> — The Hash Ledger<br><span>BNB Chain (56) · ERC-721 · OSR (BEP-20)</span></div>
+    <div><a href="index.html">Home</a> · <a href="mint.html">Mint</a> · <a href="dashboard.html">Dashboard</a> · <a href="gallery.html">Gallery</a> · <a href="admin.html">Admin</a> · <a href="agent/index.html">Agent</a></div>
+    <div>DEMO static site — no contract deployed, no live data, no wallet connection.</div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const tbody = document.getElementById("era-table");
+    for (let era = 1; era <= 8; era++) {
+      const tr = document.createElement("tr");
+      const rate = eraRate(era);
+      tr.innerHTML = `<td>Era ${era}</td><td class="num">${rate}</td>
+        <td>30 days or 150,000 new shares</td>
+        <td>${era === 1 ? "Current (Demo)" : "Upcoming (Demo)"}</td>`;
+      tbody.appendChild(tr);
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — OSSYREL · The Hash Ledger</title>
+<meta name="description" content="Your OSSYREL mining dashboard: node NFTs, hash rate, shares, era and rewards.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="demo-strip">DEMO SITE — All dashboard figures are simulation values. No wallet is connected, no nodes are owned.</div>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <rect x="2" y="2" width="36" height="36" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+        <circle cx="20" cy="20" r="10" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+        <circle cx="20" cy="20" r="4" fill="#d4af37"/>
+      </svg>
+      <span class="brand-name">OSS<span>YREL</span></span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="mint.html">Mint</a></li>
+        <li><a class="active" href="dashboard.html">Dashboard</a></li>
+        <li><a href="rewards.html">Rewards</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="admin.html">Admin</a></li>
+        <li><a href="agent/index.html">Agent</a></li>
+      </ul>
+    </nav>
+    <button class="wallet-pill" data-wallet-btn type="button"><span class="dot"></span><span data-wallet-status>Connect Wallet · DEMO</span></button>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Mining Dashboard</p>
+        <h2>My Nodes <span class="badge badge-demo">Demo</span> <span class="badge badge-pending">Wallet pending</span></h2>
+        <p class="lead">No wallet is connected, so this dashboard shows example DEMO nodes. Real data appears only after wallet connection and contract deployment.</p>
+      </div>
+
+      <div class="grid grid-4">
+        <div class="card"><div class="stat-num">3</div><div class="stat-label">My Node NFTs (Demo)</div></div>
+        <div class="card"><div class="stat-num">850 MH/s</div><div class="stat-label">My Total Hash Rate (Demo)</div></div>
+        <div class="card"><div class="stat-num">85</div><div class="stat-label">My Total Shares (Demo)</div></div>
+        <div class="card"><div class="stat-num">850 OSR</div><div class="stat-label">Accrued Rewards / Day (Demo)</div></div>
+      </div>
+
+      <div class="grid grid-2" style="margin-top: 18px;">
+        <div class="card">
+          <h3>Era Status <span class="badge badge-demo">Demo</span></h3>
+          <div class="kv"><span>Current Era</span><b data-stat="current-era">Era 1</b></div>
+          <div class="kv"><span>Era rate</span><b data-stat="era-rate">10 OSR / share / day</b></div>
+          <div class="kv"><span>Era progress</span><b data-stat="era-day">Day 1 / 30</b></div>
+          <div class="kv"><span>New shares this Era (Demo)</span><b>0 / 150,000</b></div>
+          <p class="small">An Era ends after 30 days or 150,000 new shares — whichever comes first. The next Era halves the rate.</p>
+        </div>
+        <div class="card">
+          <h3>Reward Accounting <span class="badge badge-demo">Demo</span></h3>
+          <div class="kv"><span>Accrued (Demo)</span><b>850 OSR</b></div>
+          <div class="kv"><span>Claimable (Demo)</span><b data-stat="osr-claimable">0 OSR</b></div>
+          <div class="kv"><span>Claimed (Demo)</span><b>0 OSR</b></div>
+          <div class="kv"><span>OSR distributed, all time (Demo)</span><b data-stat="osr-distributed">0 OSR</b></div>
+          <p class="small">Claiming is <strong>PENDING</strong> until the contract is deployed and verified. See <a href="rewards.html">Rewards</a>.</p>
+        </div>
+      </div>
+
+      <!-- My Node NFTs (DEMO examples) -->
+      <h2 style="margin-top: 40px;">My Node NFTs <span class="badge badge-demo">Demo examples</span></h2>
+      <p class="lead">Three example nodes, generated from the spec. These are not real tokens.</p>
+      <div class="grid grid-3">
+        <div class="card tier-card tier-gold">
+          <div class="node-art" data-node-art data-tier="gold" data-token="7"></div>
+          <h3 style="margin-top: 14px;">Node #7 — GOLD</h3>
+          <div class="kv"><span>Hash rate</span><b>500 MH/s</b></div>
+          <div class="kv"><span>Shares</span><b>50</b></div>
+          <div class="kv"><span>Era rate</span><b>10 OSR / share / day</b></div>
+          <div class="kv"><span>Daily reward (Demo)</span><b>500 OSR</b></div>
+          <div class="kv"><span>Status</span><b style="color: var(--ok);">● Active (Demo)</b></div>
+          <div class="kv"><span>Owner</span><b>DEMO wallet</b></div>
+        </div>
+        <div class="card tier-card tier-silver">
+          <div class="node-art" data-node-art data-tier="silver" data-token="42"></div>
+          <h3 style="margin-top: 14px;">Node #42 — SILVER</h3>
+          <div class="kv"><span>Hash rate</span><b>250 MH/s</b></div>
+          <div class="kv"><span>Shares</span><b>25</b></div>
+          <div class="kv"><span>Era rate</span><b>10 OSR / share / day</b></div>
+          <div class="kv"><span>Daily reward (Demo)</span><b>250 OSR</b></div>
+          <div class="kv"><span>Status</span><b style="color: var(--ok);">● Active (Demo)</b></div>
+          <div class="kv"><span>Owner</span><b>DEMO wallet</b></div>
+        </div>
+        <div class="card tier-card tier-bronze">
+          <div class="node-art" data-node-art data-tier="bronze" data-token="128"></div>
+          <h3 style="margin-top: 14px;">Node #128 — BRONZE</h3>
+          <div class="kv"><span>Hash rate</span><b>100 MH/s</b></div>
+          <div class="kv"><span>Shares</span><b>10</b></div>
+          <div class="kv"><span>Era rate</span><b>10 OSR / share / day</b></div>
+          <div class="kv"><span>Daily reward (Demo)</span><b>100 OSR</b></div>
+          <div class="kv"><span>Status</span><b style="color: var(--ok);">● Active (Demo)</b></div>
+          <div class="kv"><span>Owner</span><b>DEMO wallet</b></div>
+        </div>
+      </div>
+
+      <!-- Reward history (DEMO) -->
+      <h2 style="margin-top: 40px;">Reward History <span class="badge badge-demo">Demo</span></h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Date (Demo)</th><th>Node</th><th>Shares</th><th>Era</th><th class="num">OSR Accrued</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Day 1, Era 1</td><td>#7 — GOLD</td><td>50</td><td>1</td><td class="num">500 OSR</td><td>Accrued (Demo)</td></tr>
+            <tr><td>Day 1, Era 1</td><td>#42 — SILVER</td><td>25</td><td>1</td><td class="num">250 OSR</td><td>Accrued (Demo)</td></tr>
+            <tr><td>Day 1, Era 1</td><td>#128 — BRONZE</td><td>10</td><td>1</td><td class="num">100 OSR</td><td>Accrued (Demo)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="disclaimer"><strong>Simulation, not a promise:</strong> All reward figures are computed from the published Era parameters (Era 1: 10 OSR per share per day, halving each Era). They are design parameters, not a guarantee of profit or return.</div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap foot-grid">
+    <div><strong style="color: var(--text); letter-spacing: .2em;">OSSYREL</strong> — The Hash Ledger<br><span>BNB Chain (56) · ERC-721 · OSR (BEP-20)</span></div>
+    <div><a href="index.html">Home</a> · <a href="mint.html">Mint</a> · <a href="rewards.html">Rewards</a> · <a href="gallery.html">Gallery</a> · <a href="admin.html">Admin</a> · <a href="agent/index.html">Agent</a></div>
+    <div>DEMO static site — no contract deployed, no live data, no wallet connection.</div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

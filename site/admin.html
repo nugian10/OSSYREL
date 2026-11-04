@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — OSSYREL · The Hash Ledger</title>
+<meta name="description" content="OSSYREL admin dashboard: collection stats, mint activity, node distribution, era and pool monitoring.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="demo-strip">DEMO SITE — Admin panel shows simulation data only. Contract status: PENDING — not deployed.</div>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <rect x="2" y="2" width="36" height="36" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+        <circle cx="20" cy="20" r="10" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+        <circle cx="20" cy="20" r="4" fill="#d4af37"/>
+      </svg>
+      <span class="brand-name">OSS<span>YREL</span></span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="mint.html">Mint</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="rewards.html">Rewards</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a class="active" href="admin.html">Admin</a></li>
+        <li><a href="agent/index.html">Agent</a></li>
+      </ul>
+    </nav>
+    <button class="wallet-pill" data-wallet-btn type="button"><span class="dot"></span><span data-wallet-status>Connect Wallet · DEMO</span></button>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Admin Dashboard · Owner Only (Demo)</p>
+        <h2>Admin <span class="badge badge-demo">Demo</span> <span class="badge badge-pending">Contract pending</span></h2>
+        <p class="lead">Collection monitoring for the project owner. Everything on this page is DEMO simulation data — there is no deployed contract to administer yet.</p>
+      </div>
+
+      <div class="pending-note"><strong>PENDING — contract status:</strong> <span data-stat="contract-status">PENDING — not deployed</span>. No contract address, no on-chain events, no real mint activity exists. Admin actions (pause, era advance, pool controls) are disabled until deployment.</div>
+
+      <!-- Collection stats -->
+      <h2>Collection Statistics <span class="badge badge-demo">Demo</span></h2>
+      <div class="grid grid-4">
+        <div class="card"><div class="stat-num" data-stat="max-supply">5,000</div><div class="stat-label">Max Supply</div></div>
+        <div class="card"><div class="stat-num" data-stat="minted">0</div><div class="stat-label">Minted (Demo)</div></div>
+        <div class="card"><div class="stat-num" data-stat="total-hash">0 MH/s</div><div class="stat-label">Total Hash Rate (Demo)</div></div>
+        <div class="card"><div class="stat-num" data-stat="total-shares">0</div><div class="stat-label">Total Shares (Demo)</div></div>
+      </div>
+
+      <!-- Node distribution -->
+      <h2 style="margin-top: 40px;">Node Distribution by Class <span class="badge badge-demo">Demo</span></h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Class</th><th class="num">Price</th><th class="num">Hash Rate</th><th class="num">Shares</th><th class="num">Minted (Demo)</th><th class="num">Share of Supply</th></tr></thead>
+          <tbody id="dist-table"></tbody>
+        </table>
+      </div>
+
+      <div class="grid grid-2" style="margin-top: 18px;">
+        <!-- Era monitoring -->
+        <div class="card">
+          <h3>Era Monitoring <span class="badge badge-demo">Demo</span></h3>
+          <div class="kv"><span>Current Era</span><b data-stat="current-era">Era 1</b></div>
+          <div class="kv"><span>Era rate</span><b data-stat="era-rate">10 OSR / share / day</b></div>
+          <div class="kv"><span>Era progress</span><b data-stat="era-day">Day 1 / 30</b></div>
+          <div class="kv"><span>New shares this Era</span><b>0 / 150,000</b></div>
+          <div class="kv"><span>Next Era rate</span><b>5 OSR / share / day</b></div>
+          <p class="small">Transition: 30 days or 150,000 new shares, whichever comes first.</p>
+        </div>
+        <!-- Pool monitoring -->
+        <div class="card">
+          <h3>Pool Monitoring <span class="badge badge-demo">Demo</span></h3>
+          <div class="kv"><span>OSR max supply</span><b data-stat="osr-max">1,000,000,000 OSR</b></div>
+          <div class="kv"><span>Mining allocation</span><b data-stat="osr-mining">700,000,000 OSR</b></div>
+          <div class="kv"><span>Reserve</span><b data-stat="osr-reserve">300,000,000 OSR</b></div>
+          <div class="kv"><span>Distributed</span><b data-stat="osr-distributed">0 OSR</b></div>
+          <div class="kv"><span>Remaining in pool</span><b>700,000,000 OSR</b></div>
+          <p class="small">Pool figures are DEMO values from the published tokenomics.</p>
+        </div>
+      </div>
+
+      <!-- Mint activity -->
+      <h2 style="margin-top: 40px;">Mint Activity <span class="badge badge-demo">Demo</span></h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Time (Demo)</th><th>Token</th><th>Class</th><th class="num">Price</th><th>Wallet (Demo)</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td colspan="6" style="color: var(--muted);">No mint activity — 0 mints (Demo). Real activity will appear here after deployment.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Event history -->
+      <h2 style="margin-top: 40px;">Event History <span class="badge badge-demo">Demo</span></h2>
+      <div class="log" data-log="admin">[ready] Admin panel loaded (DEMO). No contract deployed — no on-chain events to show.
+[info] Contract status: PENDING — not deployed.
+[info] Mint activity: 0 mints. Era: 1. Pool distributed: 0 OSR.
+[warn] Admin actions are disabled until the contract is deployed and verified.</div>
+
+      <div style="margin-top: 18px;">
+        <button class="btn btn-dim" type="button" disabled aria-disabled="true">Pause Minting — Disabled (PENDING)</button>
+        <button class="btn btn-dim" type="button" disabled aria-disabled="true">Advance Era — Disabled (PENDING)</button>
+        <button class="btn btn-dim" type="button" disabled aria-disabled="true">Pool Controls — Disabled (PENDING)</button>
+      </div>
+      <p class="small" style="margin-top: 10px;">Admin actions are disabled because no contract exists to control. They unlock only after deployment and verification.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap foot-grid">
+    <div><strong style="color: var(--text); letter-spacing: .2em;">OSSYREL</strong> — The Hash Ledger<br><span>BNB Chain (56) · ERC-721 · OSR (BEP-20)</span></div>
+    <div><a href="index.html">Home</a> · <a href="mint.html">Mint</a> · <a href="dashboard.html">Dashboard</a> · <a href="rewards.html">Rewards</a> · <a href="gallery.html">Gallery</a> · <a href="agent/index.html">Agent</a></div>
+    <div>DEMO static site — no contract deployed, no live data, no wallet connection.</div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const tbody = document.getElementById("dist-table");
+    OSSYREL.tiers.forEach(t => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td><strong style="color:${t.color};">${t.name}</strong></td>
+        <td class="num">${t.priceBnb === 0 ? "FREE" : t.priceBnb + " BNB"}</td>
+        <td class="num">${t.hashRateMh.toLocaleString()} MH/s</td>
+        <td class="num">${t.shares}</td>
+        <td class="num">0</td>
+        <td class="num">— (shared 5,000 supply)</td>`;
+      tbody.appendChild(tr);
+    });
+  });
+</script>
+</body>
+</html>
