@@ -1,0 +1,28 @@
+{
+  "name": "OSSYREL #262 — STARTER Node",
+  "description": "A starter node of THE HASH LEDGER. This abstract digital node mines 10 MH/s and holds 1 share of the OSSYREL network, earning OSR tokens in Era 1. Geometric node art, generated deterministically on BNB Chain (chain ID 56).",
+  "image": "../images/262.svg",
+  "tokenId": 262,
+  "attributes": [
+    {
+      "trait_type": "Class",
+      "value": "STARTER"
+    },
+    {
+      "trait_type": "Hash Rate (MH/s)",
+      "value": 10
+    },
+    {
+      "trait_type": "Shares",
+      "value": 1
+    },
+    {
+      "trait_type": "Era",
+      "value": 1
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 262
+    }
+  ]
+}

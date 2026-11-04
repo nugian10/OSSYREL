@@ -1,0 +1,28 @@
+{
+  "name": "OSSYREL #2984 — SILVER Node",
+  "description": "A silver node of THE HASH LEDGER. This abstract digital node mines 250 MH/s and holds 25 shares of the OSSYREL network, earning OSR tokens in Era 1. Geometric node art, generated deterministically on BNB Chain (chain ID 56).",
+  "image": "../images/2984.svg",
+  "tokenId": 2984,
+  "attributes": [
+    {
+      "trait_type": "Class",
+      "value": "SILVER"
+    },
+    {
+      "trait_type": "Hash Rate (MH/s)",
+      "value": 250
+    },
+    {
+      "trait_type": "Shares",
+      "value": 25
+    },
+    {
+      "trait_type": "Era",
+      "value": 1
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 2984
+    }
+  ]
+}
