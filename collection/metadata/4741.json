@@ -1,0 +1,28 @@
+{
+  "name": "OSSYREL #4741 — DIAMOND Node",
+  "description": "A diamond node of THE HASH LEDGER. This abstract digital node mines 1500 MH/s and holds 150 shares of the OSSYREL network, earning OSR tokens in Era 1. Geometric node art, generated deterministically on BNB Chain (chain ID 56).",
+  "image": "../images/4741.svg",
+  "tokenId": 4741,
+  "attributes": [
+    {
+      "trait_type": "Class",
+      "value": "DIAMOND"
+    },
+    {
+      "trait_type": "Hash Rate (MH/s)",
+      "value": 1500
+    },
+    {
+      "trait_type": "Shares",
+      "value": 150
+    },
+    {
+      "trait_type": "Era",
+      "value": 1
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 4741
+    }
+  ]
+}
